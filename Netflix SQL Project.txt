@@ -1,0 +1,95 @@
+SELECT * FROM netflix
+
+1.)
+
+SELECT
+   COUNT(*) AS total_content,
+   type
+   FROM netflix
+GROUP BY type
+
+2.)
+
+SELECT
+   
+   COUNT(*) AS common_rating,
+   rating,
+   
+   FROM netflix
+GROUP BY rating
+ORDER BY common_rating DESC
+
+
+3.)
+SELECT * FROM netflix
+    
+
+WHERE release_year = 2020 AND type = 'Movie'
+
+
+4.)
+
+SELECT 
+    country,
+	COUNT(*)  as county
+FROM netflix
+GROUP BY 1
+ORDER BY county DESC
+limit 6
+
+5.)
+
+SELECT duration From netflix     
+WHERE 
+    type = 'Movie'
+    AND
+	duration = (SELECT MAX(duration) FROM netflix) 
+
+
+6.) 
+
+SELECT * FROM netflix
+WHERE director ILIKE '%Rajiv Chilaka%'
+
+7.)
+SELECT * FROM netflix
+WHERE type ILIKE '%TV Show%'
+    AND
+	SPLIT_PART(duration, ' ', 1)::numeric > 5 
+
+9.)
+
+SELECT 
+    COUNT(show_id),
+	UNNEST(STRING_TO_ARRAY(listed_in, ',')) as genre
+	
+FROM netflix
+GROUP BY 2
+ORDER BY 1 DESC 
+
+10.)
+SELECT 
+      AVG show_id 
+      FROM netflix
+GROUP BY year	  
+WHERE contry ILIKE '%India%'
+--not solved
+
+11.)
+
+SELECT * FROM netflix
+WHERE listed_in ILIKE '%Documentaries%'
+AND type ILIKE '%Movie%'
+
+12.)
+SELECT * FROM netflix
+WHERE director IS NULL
+
+--sOLVED
+13.)
+SELECT * FROM netflix
+WHERE 
+    casts ILIKE '%Salman Khan%'
+	AND
+	release_year > EXTRACT(YEAR FROM CURRENT_DATE) - 10
+-- i did not understand the last line fuction but solve
